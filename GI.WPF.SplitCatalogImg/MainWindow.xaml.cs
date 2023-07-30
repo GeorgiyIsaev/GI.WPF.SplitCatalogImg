@@ -29,12 +29,46 @@ namespace GI.WPF.SplitCatalogImg
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            Title = "SplitCatalog:  " + GetNameCatalog();
+            string nameFileConfig = "NameCatalog1.txt";
+            if (!isExistsCatalog(nameFileConfig))
+            {
+                MessageBox.Show("Файл конфигурации "+ nameFileConfig + " не обнружен! ");
+                var dialog = new WindowGetNameCatalog();
+                if (dialog.ShowDialog() == true)
+                {
+                    MessageBox.Show("You said: " + dialog.ResponseText);
+                }
+
+            }
+
+            string nameCatalog = GetNameCatalog(nameFileConfig);
+            if (!isExistsCatalog(nameCatalog)) MessageBox.Show("Каталог \"" + nameCatalog + "\" не обнаружен!");
+            Title = "SplitCatalog:  " + nameCatalog + " " + isExistsCatalog(nameCatalog);
+            // "C:\test\0"
         }
 
-        private string GetNameCatalog(string path = "NameCatalog.txt")
-        {         
-            string text = new StreamReader(path).ReadLine();
+        private bool isExistsCatalog(string nameCatalog) 
+        {    
+            if (!Directory.Exists(nameCatalog))
+            {        
+                return false;
+            }
+            else
+                return true;
+        }
+
+
+
+        private string GetNameCatalog(string nameCatalog)
+        {
+            if (!isExistsCatalog(nameCatalog))
+            {
+                MessageBox.Show("Каталог " + nameCatalog + " не обнаружен!");
+                return "";
+            }
+                    
+
+            string text = new StreamReader(nameCatalog).ReadLine();
             return text;
         }
 
