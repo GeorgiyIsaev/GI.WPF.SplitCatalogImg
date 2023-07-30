@@ -7,7 +7,15 @@
         mc:Ignorable="d"
         Title="SplitCatalog" Height="350" Width="600">
     <Grid>
-       
+        <Menu Height="25" VerticalAlignment="Top">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Новый Катлог" Click="MenuItem_OpenNewCatalog_Click"></MenuItem>          
+                <Separator />
+                <MenuItem Header="Exit" ></MenuItem>
+            </MenuItem>
+            <Separator />           
+        </Menu>
+
 
 
     </Grid>
