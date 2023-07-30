@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace GI.WPF.SplitCatalogImg
 {
@@ -30,20 +31,32 @@ namespace GI.WPF.SplitCatalogImg
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             string nameFileConfig = "NameCatalog1.txt";
+            string nameCatalog = "";
             if (!isExistsCatalog(nameFileConfig))
-            {
-                MessageBox.Show("Файл конфигурации "+ nameFileConfig + " не обнружен! ");
+            {            
                 var dialog = new WindowGetNameCatalog();
                 if (dialog.ShowDialog() == true)
                 {
-                    MessageBox.Show("You said: " + dialog.ResponseText);
+                    nameCatalog = dialog.ResponseText;       
                 }
-
+            }
+            //Запись нового пути к каталогу в файл
+            using (FileStream fileStream = File.Open(nameFileConfig, FileMode.Create))
+            {
+                using (StreamWriter output = new StreamWriter(fileStream))
+                {                   
+                    output.Write(nameCatalog);
+                }
             }
 
-            string nameCatalog = GetNameCatalog(nameFileConfig);
-            if (!isExistsCatalog(nameCatalog)) MessageBox.Show("Каталог \"" + nameCatalog + "\" не обнаружен!");
-            Title = "SplitCatalog:  " + nameCatalog + " " + isExistsCatalog(nameCatalog);
+
+
+            nameCatalog = GetNameCatalog(nameFileConfig);
+            if (!isExistsCatalog(nameCatalog))
+            {
+                nameCatalog = "Каталог " + nameCatalog + " не найден!";
+            }
+            Title = "SplitCatalog:  "  + nameCatalog ;
             // "C:\test\0"
         }
 
