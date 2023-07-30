@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,20 @@ namespace GI.WPF.SplitCatalogImg
         public MainWindow()
         {
             InitializeComponent();
+            this.Loaded += MainWindow_Loaded;
         }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            Title = "SplitCatalog:  " + GetNameCatalog();
+        }
+
+        private string GetNameCatalog(string path = "NameCatalog.txt")
+        {         
+            string text = new StreamReader(path).ReadLine();
+            return text;
+        }
+
+
     }
 }
