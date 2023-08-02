@@ -16,6 +16,7 @@
             <Separator />           
         </Menu>
         <Button Content="Button" HorizontalAlignment="Left" Margin="57,3,0,0" VerticalAlignment="Top" Click="Button_Click" RenderTransformOrigin="0.187,-4.164"/>
+        <Grid Name="GridCatalog"  Margin="0,54,466,141"/>
 
 
 

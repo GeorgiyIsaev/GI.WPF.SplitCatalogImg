@@ -5,6 +5,8 @@ VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GI.WPF.SplitCatalogImg", "GI.WPF.SplitCatalogImg\GI.WPF.SplitCatalogImg.csproj", "{EBC77EDC-8971-4223-B425-12667D2408FC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFNFl.SimpleCaltalog", "WPFNFl.SimpleCaltalog\WPFNFl.SimpleCaltalog.csproj", "{B835AE4B-2259-4C7C-97FF-4065B3BB075F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{EBC77EDC-8971-4223-B425-12667D2408FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBC77EDC-8971-4223-B425-12667D2408FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBC77EDC-8971-4223-B425-12667D2408FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B835AE4B-2259-4C7C-97FF-4065B3BB075F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B835AE4B-2259-4C7C-97FF-4065B3BB075F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B835AE4B-2259-4C7C-97FF-4065B3BB075F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B835AE4B-2259-4C7C-97FF-4065B3BB075F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

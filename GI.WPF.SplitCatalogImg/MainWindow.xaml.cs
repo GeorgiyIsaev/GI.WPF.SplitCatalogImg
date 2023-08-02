@@ -95,6 +95,9 @@ namespace GI.WPF.SplitCatalogImg
             {
                 folderPath = folderBrowserDialog1.SelectedPath;
             }
+
+
+        
         }
     }
 }
