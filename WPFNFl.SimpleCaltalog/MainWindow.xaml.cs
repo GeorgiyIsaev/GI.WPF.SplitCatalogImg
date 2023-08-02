@@ -37,8 +37,14 @@ namespace WPFNFl.SimpleCaltalog
         private object dummyNode = null;
         private void foldersItem_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            MessageBox.Show("" + e.Source.ToString());
+            TreeViewItem dp = (sender as Button).Parent as TreeViewItem;
+
+
+
+            MessageBox.Show("" + dp.Tag.ToString());
         }
+
+ 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             foreach (string s in Directory.GetLogicalDrives())
@@ -49,6 +55,7 @@ namespace WPFNFl.SimpleCaltalog
                 item.Tag = s;
                 item.FontWeight = FontWeights.Normal;
                 item.Items.Add(dummyNode);
+               // item.Items.Add(new DummyNode(s));
                 item.Expanded += new RoutedEventHandler(folder_Expanded);
                 foldersItem.Items.Add(item);
             }
@@ -67,7 +74,7 @@ namespace WPFNFl.SimpleCaltalog
                         TreeViewItem subitem = new TreeViewItem();
                         subitem.Header = s.Substring(s.LastIndexOf("\\") + 1);
                         subitem.Tag = s;
-                        subitem.FontWeight = FontWeights.Normal;
+                        subitem.FontWeight = FontWeights.Normal;                      
                         subitem.Items.Add(dummyNode);
                         subitem.Expanded += new RoutedEventHandler(folder_Expanded);
                         item.Items.Add(subitem);
@@ -90,13 +97,14 @@ namespace WPFNFl.SimpleCaltalog
         public object Convert(object value, Type targetType,
         object parameter, CultureInfo culture)
         {
-    
+            var a = value.GetType();
+
             if ((value as string).Contains(@"\"))
-            {           
+            {
                 return BitmapT1oImageSource(Properties.Resources.diskdrive);
             }
             else
-            {       
+            {
                 return BitmapT1oImageSource(Properties.Resources.folder);
             }
         }

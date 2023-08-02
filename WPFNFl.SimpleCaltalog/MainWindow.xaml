@@ -8,7 +8,7 @@
         Title="MainWindow" Height="450" Width="800">
    
     <Grid>
-        
+
         
         <TreeView x:Name="foldersItem"
           SelectedItemChanged="foldersItem_SelectedItemChanged"
@@ -34,6 +34,9 @@
                     </Setter>
                 </Style>
             </TreeView.Resources>
+        
         </TreeView>
+        
+        
     </Grid>
 </Window>
