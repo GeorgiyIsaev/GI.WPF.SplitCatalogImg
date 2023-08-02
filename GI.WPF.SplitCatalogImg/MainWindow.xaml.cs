@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,12 +9,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static System.Net.Mime.MediaTypeNames;
+
 
 namespace GI.WPF.SplitCatalogImg
 {
@@ -37,54 +40,9 @@ namespace GI.WPF.SplitCatalogImg
             {
                 Title = "SplitCatalog:  " + nameCatalog;
             }
-
-
-            //if (isExistsCatalog(nameCatalog))
-            //{
-            //    Title = "SplitCatalog:  " + nameCatalog;
-            //}
-           
-
-
-            //string nameFileConfig = "NameCatalog1.txt";
-            //string nameCatalog = "";
-            //if (!isExistsCatalog(nameFileConfig))
-            //{            
-            //    var dialog = new WindowGetNameCatalog();
-            //    if (dialog.ShowDialog() == true)
-            //    {
-            //        nameCatalog = dialog.ResponseText;       
-            //    }
-            //}
-            ////Запись нового пути к каталогу в файл
-            //using (FileStream fileStream = File.Open(nameFileConfig, FileMode.Create))
-            //{
-            //    using (StreamWriter output = new StreamWriter(fileStream))
-            //    {                   
-            //        output.Write(nameCatalog);
-            //    }
-            //}
-
-
-
-            //nameCatalog = GetNameCatalog(nameFileConfig);
-            //if (!isExistsCatalog(nameCatalog))
-            //{
-            //    nameCatalog = "Каталог " + nameCatalog + " не найден!";
-            //}
-            //Title = "SplitCatalog:  "  + nameCatalog ;
-            //// "C:\test\0"
         }
 
-        //private bool isExistsCatalog(string nameCatalog) 
-        //{    
-        //    if (!Directory.Exists(nameCatalog))
-        //    {        
-        //        return false;
-        //    }
-        //    else
-        //        return true;
-        //}
+
 
 
 
@@ -109,16 +67,10 @@ namespace GI.WPF.SplitCatalogImg
             }
             if (!Directory.Exists(nameCatalog))
             {
-                MessageBox.Show("Каталог " + nameCatalog + " не обнаружен!");
+                System.Windows.MessageBox.Show("Каталог " + nameCatalog + " не обнаружен!");
                 Title = "SplitCatalog:";
                 return;
-            }
-
-            //if (!isExistsCatalog(nameCatalog))
-            //{
-            //    MessageBox.Show("Каталог " + nameCatalog + " не обнаружен!");
-            //    return;
-            //}          
+            }         
 
 
             string nameFileConfig = "fileConfig.txt";
@@ -131,6 +83,18 @@ namespace GI.WPF.SplitCatalogImg
             }
 
             Title = "SplitCatalog:  " + nameCatalog;
+        }
+       //System.Windows.Forms.OpenFileDialog;
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            
+
+            string folderPath = "";
+            System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            if (folderBrowserDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                folderPath = folderBrowserDialog1.SelectedPath;
+            }
         }
     }
 }
