@@ -37,7 +37,7 @@ namespace WPFNFl.SimpleCaltalog
         private object dummyNode = null;
         private void foldersItem_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-
+            MessageBox.Show("" + e.Source.ToString());
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -92,9 +92,8 @@ namespace WPFNFl.SimpleCaltalog
         {
     
             if ((value as string).Contains(@"\"))
-            {
-                return Properties.Resources.diskdrive;
-                //return BitmapT1oImageSource(Properties.Resources.diskdrive);
+            {           
+                return BitmapT1oImageSource(Properties.Resources.diskdrive);
             }
             else
             {       
