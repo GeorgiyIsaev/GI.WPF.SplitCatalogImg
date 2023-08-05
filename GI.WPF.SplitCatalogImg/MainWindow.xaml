@@ -39,20 +39,31 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20" />
                         <RowDefinition Height="20" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="100"  />
                     </Grid.RowDefinitions>
-                    <StackPanel Orientation="Horizontal" Grid.Row="0">
+                    <WrapPanel Orientation="Horizontal" Grid.Row="0">
                     <TextBlock Width="80" Text="Род.папка" HorizontalAlignment="Left"/>
                         <TextBox x:Name="TextBox_NameParentFolder" Text="TextBox_NameParentFolder" IsReadOnly="True" />
-                </StackPanel>
+                </WrapPanel>
                 <StackPanel Orientation="Horizontal" Grid.Row="1">
                     <TextBlock Width="80" Text="Имя папки" HorizontalAlignment="Left"/>
-                    <TextBox x:Name="TextBox_NameCurrentFolder" Text="TextBox_NameCurrentFolder" IsReadOnly="True"/>
+                    <TextBox x:Name="TextBox_NameCurrentFolder" Text="TextBox_NameCurrentFolder" IsReadOnly="True" Width="auto"/>
                 </StackPanel>
+                   <DataGrid Grid.Row="2"/>
+                 
                 </Grid>
-                
-
+                <Grid Height="80" VerticalAlignment="Bottom"  >
+                    <StackPanel Orientation="Horizontal" Grid.Row="1">
+                        <TextBlock Width="80" Text="Имя папки" HorizontalAlignment="Left"/>
+                        <TextBox x:Name="re" Text="TextBox_NameCurrentFolder" IsReadOnly="True" Width="auto"/>
+                    </StackPanel>
+                </Grid>
 
             </Grid>
+
+
+        
 
         </Grid>    
     </Grid>
