@@ -33,13 +33,13 @@ namespace GI.WPF.SplitCatalogImg
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            string nameFileConfig = "fileConfig.txt";
-            string nameCatalog = GetNameCatalog(nameFileConfig);
+            //string nameFileConfig = "fileConfig.txt";
+            //string nameCatalog = GetNameCatalog(nameFileConfig);
 
-            if (Directory.Exists(nameCatalog))
-            {
-                Title = "SplitCatalog:  " + nameCatalog;
-            }
+            //if (Directory.Exists(nameCatalog))
+            //{
+            //    Title = "SplitCatalog:  " + nameCatalog;
+            //}
         }
 
 
@@ -57,6 +57,16 @@ namespace GI.WPF.SplitCatalogImg
             return "";
         }
 
+        private void MenuItem_OpeCatalog_Click(object sender, RoutedEventArgs e)
+        {
+            string folderPath = "";
+            System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            if (folderBrowserDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                folderPath = folderBrowserDialog1.SelectedPath;
+            }
+            Title = "SplitCatalog:  " + folderPath;
+        }
         private void MenuItem_OpenNewCatalog_Click(object sender, RoutedEventArgs e)
         {
             string nameCatalog = "";
@@ -94,10 +104,7 @@ namespace GI.WPF.SplitCatalogImg
             if (folderBrowserDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 folderPath = folderBrowserDialog1.SelectedPath;
-            }
-
-
-        
+            }        
         }
     }
 }

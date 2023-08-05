@@ -9,16 +9,51 @@
     <Grid>
         <Menu Height="25" VerticalAlignment="Top">
             <MenuItem Header="Файл">
-                <MenuItem Header="Новый Катлог" Click="MenuItem_OpenNewCatalog_Click"></MenuItem>          
+                <MenuItem Header="Новый Катлог" Click="MenuItem_OpenNewCatalog_Click"></MenuItem>
+                <MenuItem Header="Открыть папку" Click="MenuItem_OpeCatalog_Click"></MenuItem>
                 <Separator />
                 <MenuItem Header="Exit" ></MenuItem>
             </MenuItem>
-            <Separator />           
+            <Separator />
         </Menu>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="57,3,0,0" VerticalAlignment="Top" Click="Button_Click" RenderTransformOrigin="0.187,-4.164"/>
-        <Grid Name="GridCatalog"  Margin="0,54,466,141"/>
 
 
+        <Grid Margin="0,25,0,0">
+            
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="140" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />            
+            </Grid.ColumnDefinitions>
+            <!--Сплитер-->
+            <GridSplitter Grid.Column="1" ShowsPreview="False" Width="5" HorizontalAlignment="Center" VerticalAlignment="Stretch" />
 
+            <!--Колонка 1-->
+            <Grid Grid.Column="0">                
+            </Grid>
+            <!--Колонка 2-->
+            <Grid Grid.Column="2" >
+                <!--Height="31"-->
+                <Grid  VerticalAlignment="Top">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" Grid.Row="0">
+                    <TextBlock Width="80" Text="Род.папка" HorizontalAlignment="Left"/>
+                        <TextBox x:Name="TextBox_NameParentFolder" Text="TextBox_NameParentFolder" IsReadOnly="True" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Row="1">
+                    <TextBlock Width="80" Text="Имя папки" HorizontalAlignment="Left"/>
+                    <TextBox x:Name="TextBox_NameCurrentFolder" Text="TextBox_NameCurrentFolder" IsReadOnly="True"/>
+                </StackPanel>
+                </Grid>
+                
+
+
+            </Grid>
+
+        </Grid>    
     </Grid>
 </Window>

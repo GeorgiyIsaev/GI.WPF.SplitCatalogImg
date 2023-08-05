@@ -97,7 +97,7 @@ namespace WPFNFl.SimpleCaltalog
         public object Convert(object value, Type targetType,
         object parameter, CultureInfo culture)
         {
-            var a = value.GetType();
+          
 
             if ((value as string).Contains(@"\"))
             {

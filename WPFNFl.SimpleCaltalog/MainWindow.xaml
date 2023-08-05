@@ -16,6 +16,7 @@
           BorderBrush="#FFFFFFFF"
           Foreground="#FFFFFFFF" Margin="10,10,515,10">
             <TreeView.Resources>
+               
                 <Style TargetType="{x:Type TreeViewItem}">
                     <Setter Property="HeaderTemplate">
                         <Setter.Value>
@@ -35,6 +36,7 @@
                 </Style>
             </TreeView.Resources>
         
+          
         </TreeView>
         
         
