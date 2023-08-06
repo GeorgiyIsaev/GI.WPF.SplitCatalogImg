@@ -25,6 +25,58 @@ namespace GI.WPF.SplitCatalogImg
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        private string currentCatalog = "";
+        public string GetCeurrntCatalog() { return currentCatalog; }
+
+        public void SetCeurrntCatalog(string Catalog) 
+        {
+            if (Catalog == "") return;
+
+            if (!Directory.Exists(Catalog))
+            {
+                MessageBox.Show("Доступ к каталогу \"" + Catalog  + "\" отсутствует или такой катлог не существует!");
+                return;
+            }  
+            currentCatalog = Catalog;
+            Title = "SplitCatalog:  " + Catalog;
+            
+            List<string> listCatalogs = new List<string>(currentCatalog.Split('\\'));
+            if(listCatalogs.Last() == "")
+            {
+                listCatalogs.RemoveAt(listCatalogs.Count - 1);
+            }
+
+            if(listCatalogs.Count<1)
+            {
+                TextBox_NameParentFolder.Text = "";
+                TextBox_NameCurrentFolder.Text = "";
+            }
+            if (listCatalogs.Count == 1)
+            {
+                TextBox_NameParentFolder.Text = "";
+                TextBox_NameCurrentFolder.Text = listCatalogs.Last();
+            }
+            else
+            {
+                TextBox_NameParentFolder.Text = listCatalogs.ElementAt(listCatalogs.Count - 2);
+                TextBox_NameCurrentFolder.Text = listCatalogs.Last();
+            }
+            TextBox_BeforeCounter.Text = "";
+            TextBox_AfterCounter.Text = "";
+
+            var a = Directory.GetFiles(currentCatalog);
+
+
+            TextBox_BeginningCounter.Text = "1";          
+            TextBox_CountFiles.Text = "";
+            TextBox_CountСharacter.Text = "";
+          
+
+        }
+
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -65,7 +117,7 @@ namespace GI.WPF.SplitCatalogImg
             {
                 folderPath = folderBrowserDialog1.SelectedPath;
             }
-            Title = "SplitCatalog:  " + folderPath;
+            SetCeurrntCatalog(folderPath);
         }
         private void MenuItem_OpenNewCatalog_Click(object sender, RoutedEventArgs e)
         {
@@ -92,7 +144,7 @@ namespace GI.WPF.SplitCatalogImg
                 }
             }
 
-            Title = "SplitCatalog:  " + nameCatalog;
+            SetCeurrntCatalog(nameCatalog);
         }
        //System.Windows.Forms.OpenFileDialog;
         private void Button_Click(object sender, RoutedEventArgs e)
