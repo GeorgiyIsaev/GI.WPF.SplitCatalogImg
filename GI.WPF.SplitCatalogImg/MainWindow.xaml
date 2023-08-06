@@ -4,9 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GI.WPF.SplitCatalogImg"
-        mc:Ignorable="d"
+        mc:Ignorable="d" FontSize="14"
         Title="SplitCatalog" Height="350" Width="600">
-    <Grid>
+    <Grid >
         <Menu Height="25" VerticalAlignment="Top">
             <MenuItem Header="Файл">
                 <MenuItem Header="Новый Катлог" Click="MenuItem_OpenNewCatalog_Click"></MenuItem>
@@ -19,30 +19,77 @@
 
 
         <Grid Margin="0,25,0,0">
-            
-            
+
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="140" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />            
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+
             <!--Сплитер-->
             <GridSplitter Grid.Column="1" ShowsPreview="False" Width="5" HorizontalAlignment="Center" VerticalAlignment="Stretch" />
 
             <!--Колонка 1-->
-            <Grid Grid.Column="0">                
+            <Grid Grid.Column="0">
             </Grid>
+
             <!--Колонка 2-->
-            <Grid Grid.Column="2" >
-                <!--Height="31"-->
-                <Grid  VerticalAlignment="Top">
+            <Grid Grid.Column="2">
+                <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="20" />
-                        <RowDefinition Height="20" />
+                        <RowDefinition Height="22" />
+                        <RowDefinition Height="22" />
                         <RowDefinition Height="*" />
-                        <RowDefinition Height="100"  />
+                        <RowDefinition Height="22"  />
+                        <RowDefinition Height="22"  />
+                        <RowDefinition Height="22"  />
                     </Grid.RowDefinitions>
-                    <WrapPanel Orientation="Horizontal" Grid.Row="0">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80" />
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="35" />
+                        <ColumnDefinition Width="75" />
+                        <ColumnDefinition Width="75" />
+                        <ColumnDefinition Width="75" />
+
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!--Род папка-->
+                    <TextBlock Grid.Row="0" Grid.Column="0"  Width="80" Text=" Род. папка:" HorizontalAlignment="Left"/>
+                    <TextBox Grid.Row="0" Grid.Column="1"  x:Name="TextBox_NameParentFolder" Text="TextBox_NameParentFolder" IsReadOnly="True" Grid.ColumnSpan="6" Margin="0,0,10,0" />
+
+                    <!--Имя папка-->
+                    <TextBlock Grid.Row="1" Grid.Column="0"  Width="80" Text=" Имя папки:" HorizontalAlignment="Left"/>
+                    <TextBox Grid.Row="1" Grid.Column="1"  x:Name="TextBox_NameCurrentFolder" Text="TextBox_NameCurrentFolder" IsReadOnly="True" Grid.ColumnSpan="6" Margin="0,0,10,0" />
+
+                    <DataGrid Grid.Row="2" Grid.ColumnSpan="7" Margin="0,0,10,0"/>
+
+                    <!--Нумерации 3-->
+                    <TextBlock Grid.Row="3" Grid.Column="0"   Text=" Счетчик с: " HorizontalAlignment="Left"/>
+                    <TextBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" x:Name="кvр" Text="22" IsReadOnly="True"  />
+
+                    <TextBlock Grid.Row="3" Grid.Column="3"   Text="  Цифр " HorizontalAlignment="Left"/>
+                    <TextBox Grid.Row="3" Grid.Column="4" x:Name="кfffvр" Text="22" IsReadOnly="True"  />
+
+                    <TextBlock Grid.Row="3" Grid.Column="5"   Text=" Файлов: " HorizontalAlignment="Left"/>
+                    <TextBox Grid.Row="2" Grid.Column="6"  x:Name="кfппffvр" Text="22" IsReadOnly="True" Margin="0,199,10,0" Grid.RowSpan="2"  />
+
+                    <!--Перед нумирацией 4-->
+                    <TextBlock Grid.Row="4" Grid.Column="0"  Text=" Перед счетчиком: " HorizontalAlignment="Left"/>
+                    <TextBox Grid.Row="3" Grid.Column="3"  x:Name="кfeр" Text="а" IsReadOnly="True" Grid.ColumnSpan="4" Margin="5,22,10,0" Grid.RowSpan="2" />
+
+                    <!--После нумирации 5-->
+                    <TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3"  Text=" После счетчика: " HorizontalAlignment="Left"/>
+                    <TextBox Grid.Row="4" Grid.Column="3"  x:Name="р" Text="TextBox_NameParentFolder" IsReadOnly="True" Grid.ColumnSpan="4" Margin="5,22,10,0" Grid.RowSpan="2" />
+
+
+                </Grid>
+
+
+                <!--<WrapPanel Orientation="Horizontal" Grid.Row="0">
                     <TextBlock Width="80" Text="Род.папка" HorizontalAlignment="Left"/>
                         <TextBox x:Name="TextBox_NameParentFolder" Text="TextBox_NameParentFolder" IsReadOnly="True" />
                 </WrapPanel>
@@ -53,18 +100,31 @@
                    <DataGrid Grid.Row="2"/>
                  
                 </Grid>
-                <Grid Height="80" VerticalAlignment="Bottom"  >
+                <Grid Height="80" VerticalAlignment="Bottom" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />                       
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" Grid.Row="0">
+                        <TextBlock Width="80" Text="Имя папки" HorizontalAlignment="Left"/>
+                        <TextBox x:Name="r2e" Text="TextBox_NameCurrentFolder" IsReadOnly="True" Width="auto"/>
+                    </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
                         <TextBlock Width="80" Text="Имя папки" HorizontalAlignment="Left"/>
                         <TextBox x:Name="re" Text="TextBox_NameCurrentFolder" IsReadOnly="True" Width="auto"/>
                     </StackPanel>
-                </Grid>
+                    <StackPanel Orientation="Horizontal" Grid.Row="2">
+                        <TextBlock Width="80" Text="Имя папки" HorizontalAlignment="Left"/>
+                        <TextBox x:Name="re2" Text="TextBox_NameCurrentFolder" IsReadOnly="True" Width="auto"/>
+                    </StackPanel>-->
+                <!--</Grid>-->
+
+                <!--</Grid>-->
+
+
 
             </Grid>
-
-
-        
-
-        </Grid>    
+        </Grid>
     </Grid>
 </Window>
