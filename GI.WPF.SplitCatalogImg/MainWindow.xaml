@@ -65,7 +65,7 @@
                     <TextBlock Grid.Row="1" Grid.Column="0"  Width="80" Text=" Имя папки:" HorizontalAlignment="Left"/>
                     <TextBox Grid.Row="1" Grid.Column="1"  x:Name="TextBox_NameCurrentFolder" Text="TextBox_NameCurrentFolder" IsReadOnly="True" Grid.ColumnSpan="6" Margin="0,0,10,0" />
 
-                    <DataGrid Grid.Row="2" Grid.ColumnSpan="7" Margin="0,0,10,0"/>
+                    <DataGrid x:Name="DataGrid_NameFiles" Grid.Row="2" Grid.ColumnSpan="7" Margin="0,0,10,0"/>
 
                     <!--Нумерации 3-->
                     <TextBlock Grid.Row="3" Grid.Column="0"   Text=" Счетчик с: " HorizontalAlignment="Left"/>
@@ -75,15 +75,15 @@
                     <TextBox Grid.Row="3" Grid.Column="4" x:Name="TextBox_CountСharacter" Text="22" IsReadOnly="True"  />
 
                     <TextBlock Grid.Row="3" Grid.Column="5"   Text=" Файлов: " HorizontalAlignment="Left"/>
-                    <TextBox Grid.Row="2" Grid.Column="6"  x:Name="TextBox_CountFiles" Text="22" IsReadOnly="True" Margin="0,199,10,0" Grid.RowSpan="2"  />
+                    <TextBox Grid.Row="3" Grid.Column="6"  x:Name="TextBox_CountFiles" Text="22" IsReadOnly="True" Margin="0,0,10,0" Grid.RowSpan="2"  />
 
                     <!--Перед нумирацией 4-->
                     <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Text=" Перед счетчиком: " HorizontalAlignment="Left"/>
-                    <TextBox Grid.Row="3" Grid.Column="3"  x:Name="TextBox_BeforeCounter" Text="TextBox_BeforeCounter" IsReadOnly="True" Grid.ColumnSpan="4" Margin="5,22,10,0" Grid.RowSpan="2" />
+                    <TextBox Grid.Row="4" Grid.Column="3"  x:Name="TextBox_BeforeCounter" Text="TextBox_BeforeCounter" IsReadOnly="True" Grid.ColumnSpan="4" Margin="5,0,10,0" Grid.RowSpan="2" />
 
                     <!--После нумирации 5-->
                     <TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3"  Text=" После счетчика: " HorizontalAlignment="Left"/>
-                    <TextBox Grid.Row="4" Grid.Column="3"  x:Name="TextBox_AfterCounter" Text="TextBox_NameParentFolder" IsReadOnly="True" Grid.ColumnSpan="4" Margin="5,22,10,0" Grid.RowSpan="2" />
+                    <TextBox Grid.Row="5" Grid.Column="3"  x:Name="TextBox_AfterCounter" Text="TextBox_NameParentFolder" IsReadOnly="True" Grid.ColumnSpan="4" Margin="5,0,10,0" Grid.RowSpan="2" />
 
 
                 </Grid>
