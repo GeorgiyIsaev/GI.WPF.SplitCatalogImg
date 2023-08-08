@@ -39,8 +39,8 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="22" />
-                        <RowDefinition x:Name="RowDataGrid2" Height="22" />
-                        <RowDefinition x:Name="RowDataGrid" Height="*" />
+                        <RowDefinition Height="22" />
+                        <RowDefinition Height="*" />
                         <RowDefinition Height="22"  />
                         <RowDefinition Height="22"  />
                         <RowDefinition Height="22"  />

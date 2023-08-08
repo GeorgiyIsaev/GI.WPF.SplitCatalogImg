@@ -71,22 +71,11 @@ namespace GI.WPF.SplitCatalogImg
 
 
             /*Получение списка файлов*/
-            //ListFiles.CreateNewListFile(currentCatalog);
-            //var agr = SortFilesList();
 
             ListFiles.CreateNewListFile(currentCatalog);
             DataGrid_NameFiles.ItemsSource = ListFiles.files;
             ResetComboBox_CountСharacter(ListFiles.files.Count);
-            TextBox_CountFiles.Text = "" + ListFiles.files.Count;
-            /*Доп информация о количесвте файлов*/
-            //TextBox_CountFiles.Text = "" + agr.Count;
-            //if(agr.Count<10)
-            //    TextBox_CountСharacter.Text = "1";
-            //else if (agr.Count < 100)
-            //    TextBox_CountСharacter.Text = "2";
-            //else if (agr.Count < 1000)
-            //    TextBox_CountСharacter.Text = "3";
-            //comboBox1.SelectedIndex = 1;
+            TextBox_CountFiles.Text = "" + ListFiles.files.Count;   
         }
 
         private void ResetComboBox_CountСharacter(int countFiles)
@@ -148,14 +137,7 @@ namespace GI.WPF.SplitCatalogImg
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            //string nameFileConfig = "fileConfig.txt";
-            //string nameCatalog = GetNameCatalog(nameFileConfig);
-
-            //if (Directory.Exists(nameCatalog))
-            //{
-            //    Title = "SplitCatalog:  " + nameCatalog;
-            //}
+        {   
         }
 
 
@@ -235,21 +217,7 @@ namespace GI.WPF.SplitCatalogImg
                  beginningCounter,
                  countСharacter
                  );
-
-            var d = RowDataGrid.Height;
-            //var e = new GridLength(0);
-
-
-            //RowDataGrid.Height = GridLength.Value;
-            RowDataGrid.Height = new GridLength(0);
-            RowDataGrid.Height = d;
-            //var d2 =  RowDataGrid2.Height;
-            //RowDataGrid2.Height = GridLengthConverter(0);
-            // var d = Height;
-            //Height = 0;
-            //Height = d;
-
-            // DataGrid_NameFiles.ItemsSource = ListFiles.files;
+            DataGrid_NameFiles.Items.Refresh();
         }
 
         private void Button_ReName_Click(object sender, RoutedEventArgs e)
