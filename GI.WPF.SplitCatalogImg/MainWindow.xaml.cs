@@ -71,22 +71,34 @@ namespace GI.WPF.SplitCatalogImg
 
 
             /*Получение списка файлов*/
-            ListFiles.CreateNewListFile(currentCatalog);
-
-            var agr = SortFilesList();
+            //ListFiles.CreateNewListFile(currentCatalog);
+            //var agr = SortFilesList();
 
             ListFiles.CreateNewListFile(currentCatalog);
             DataGrid_NameFiles.ItemsSource = ListFiles.files;
+            ResetComboBox_CountСharacter(ListFiles.files.Count);
+            TextBox_CountFiles.Text = "" + ListFiles.files.Count;
+            /*Доп информация о количесвте файлов*/
+            //TextBox_CountFiles.Text = "" + agr.Count;
+            //if(agr.Count<10)
+            //    TextBox_CountСharacter.Text = "1";
+            //else if (agr.Count < 100)
+            //    TextBox_CountСharacter.Text = "2";
+            //else if (agr.Count < 1000)
+            //    TextBox_CountСharacter.Text = "3";
+            //comboBox1.SelectedIndex = 1;
+        }
 
-
-            /*Доп информация о количесвте файлов*/                    
-            TextBox_CountFiles.Text = "" + agr.Count;
-            if(agr.Count<10)
-                TextBox_CountСharacter.Text = "1";
-            else if (agr.Count < 100)
-                TextBox_CountСharacter.Text = "2";
-            else if (agr.Count < 1000)
-                TextBox_CountСharacter.Text = "3";  
+        private void ResetComboBox_CountСharacter(int countFiles)
+        {
+            ComboBox_CountСharacter.Items.Clear();
+            int digitCount = (int)Math.Log10(countFiles) + 1;
+            do
+            {
+                ComboBox_CountСharacter.Items.Add(digitCount.ToString());
+                digitCount++;
+            } while (digitCount <= 10);       
+            ComboBox_CountСharacter.SelectedIndex = 0;
         }
 
 
@@ -209,6 +221,48 @@ namespace GI.WPF.SplitCatalogImg
             {
                 folderPath = folderBrowserDialog1.SelectedPath;
             }        
+        }
+
+        private void Button_Preview_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentCatalog == "") return;
+            if (TextBox_BeginningCounter.Text == "") TextBox_BeginningCounter.Text = "1";
+            int countСharacter = int.Parse(ComboBox_CountСharacter.Text.ToString());
+            int beginningCounter = int.Parse(TextBox_BeginningCounter.Text);
+
+            ListFiles.NewNameFile(TextBox_BeforeCounter.Text,
+                 TextBox_AfterCounter.Text,
+                 beginningCounter,
+                 countСharacter
+                 );
+
+            var d = RowDataGrid.Height;
+            //var e = new GridLength(0);
+
+
+            //RowDataGrid.Height = GridLength.Value;
+            RowDataGrid.Height = new GridLength(0);
+            RowDataGrid.Height = d;
+            //var d2 =  RowDataGrid2.Height;
+            //RowDataGrid2.Height = GridLengthConverter(0);
+            // var d = Height;
+            //Height = 0;
+            //Height = d;
+
+            // DataGrid_NameFiles.ItemsSource = ListFiles.files;
+        }
+
+        private void Button_ReName_Click(object sender, RoutedEventArgs e)
+        {
+            DataGrid_NameFiles.ItemsSource = ListFiles.files;
+        }
+
+        private void TextBox_BeginningCounter_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {           
+                if (!Char.IsDigit(e.Text, 0))
+                {
+                    e.Handled = true;
+                }            
         }
     }
 }

@@ -39,8 +39,8 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="22" />
-                        <RowDefinition Height="22" />
-                        <RowDefinition Height="*" />
+                        <RowDefinition x:Name="RowDataGrid2" Height="22" />
+                        <RowDefinition x:Name="RowDataGrid" Height="*" />
                         <RowDefinition Height="22"  />
                         <RowDefinition Height="22"  />
                         <RowDefinition Height="22"  />
@@ -70,17 +70,17 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="N" Binding="{Binding Path=Id}" IsReadOnly="True"  Width="25" />
                             <DataGridTextColumn Header="Имя файла" Binding="{Binding Path=Name}" IsReadOnly="True"  Width="*" />
-                            <DataGridHyperlinkColumn Header="Новое имя файла" Binding="{Binding Path=NewName}" IsReadOnly="True"  Width="*" />
+                            <DataGridTextColumn Header="Новое имя файла" Binding="{Binding Path=NewName}" IsReadOnly="True"  Width="*" />
                         </DataGrid.Columns>
                     </DataGrid>
 
                     <!--Нумерации 3-->
                     <TextBlock Grid.Row="3" Grid.Column="0"   Text=" Счетчик с: " HorizontalAlignment="Left"/>
-                    <TextBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" x:Name="TextBox_BeginningCounter" Text="22" IsReadOnly="True"  />
+                    <TextBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" x:Name="TextBox_BeginningCounter" PreviewTextInput="TextBox_BeginningCounter_PreviewTextInput" Text="22"   />
 
                     <TextBlock Grid.Row="3" Grid.Column="3"   Text="  Цифр " HorizontalAlignment="Left"/>
-                    <TextBox Grid.Row="3" Grid.Column="4" x:Name="TextBox_CountСharacter" Text="22" IsReadOnly="True"  />
-
+                    <ComboBox Grid.Row="3" Grid.Column="4" x:Name="ComboBox_CountСharacter" IsReadOnly="True"  />
+                    <!--<ComboBox />-->
                     <TextBlock Grid.Row="3" Grid.Column="5"   Text=" Файлов: " HorizontalAlignment="Left"/>
                     <TextBox Grid.Row="3" Grid.Column="6"  x:Name="TextBox_CountFiles" Text="22" IsReadOnly="True" Margin="0,0,10,0" Grid.RowSpan="2"  />
 
@@ -93,8 +93,8 @@
                     <TextBox Grid.Row="5" Grid.Column="3"  x:Name="TextBox_AfterCounter" Text="TextBox_NameParentFolder" IsReadOnly="True" Grid.ColumnSpan="4" Margin="5,0,10,0" Grid.RowSpan="2" />
 
                     <!--После нумирации 6-->
-                    <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4" Margin="2" x:Name="bw" Content="reerg" />
-                    <Button Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="3" Margin="2,2,10,2" x:Name="ger"  Content="reerg" />
+                    <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4" Margin="2" x:Name="Button_Preview" Click="Button_Preview_Click" Content="Предпросмотр" />
+                    <Button Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="3" Margin="2,2,10,2" x:Name="Button_ReName" Click="Button_ReName_Click"  Content="Переименовать" />
                 </Grid>
 
             </Grid>

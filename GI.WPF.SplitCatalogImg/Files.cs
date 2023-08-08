@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -8,23 +9,61 @@ using System.Xml.Linq;
 
 namespace GI.WPF.SplitCatalogImg
 {
+    public class NameFile
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string NewName { get; set; }
+
+        private string fullName;
+        public NameFile(string fullName, int id)
+        {
+            Id = id.ToString();
+            this.fullName = fullName;
+            Name = fullName.Substring(fullName.LastIndexOf('\\') + 1);
+            NewName = "";
+
+        }
+    }
+
     static public class ListFiles
     {
-        static public List<NameFile> files = new List<NameFile>();
+        static public ObservableCollection<NameFile> files = new ObservableCollection<NameFile>();
 
         static public void CreateNewListFile(string currentCatalog)
         {
-            files = new List<NameFile>();
+            files = new ObservableCollection<NameFile>();
 
             List<string> sortFilesList = new List<string>(Directory.GetFiles(currentCatalog));
             sortFilesList = SortFilesList(sortFilesList);
 
-            int counter = 0;
+            int counter = 1;
             foreach (var namefile in sortFilesList)
             {
                 files.Add(new NameFile(namefile, counter++));
             }
         }
+
+        static public void NewNameFile(string befor, string after, int startCount, int characters)
+        {
+            foreach (var namefile in files)
+            {
+                string fileExtension = namefile.Name.Substring(namefile.Name.LastIndexOf('.') + 1);
+
+                string countrStr = startCount.ToString();
+
+
+                while (characters > countrStr.Length)
+                {
+                    countrStr = "0" + countrStr;
+                }             
+
+                namefile.NewName = befor + countrStr + after + "." + fileExtension;
+               
+                startCount++;
+            }
+        }
+
 
         static private List<string> SortFilesList(List<string> noSortFilesList)
         {
@@ -65,23 +104,5 @@ namespace GI.WPF.SplitCatalogImg
     }
 
 
-    public class NameFile
-    {
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string NewName { get; set; }
-
-        private string fullName;
-
-        public NameFile(string fullName, int id)
-        {
-            Id = id.ToString();
-            this.fullName = fullName;
-            Name = fullName.Substring(fullName.LastIndexOf('\\') + 1);
-            NewName = "";
-
-        }
-
-
-    }
+    
 }
