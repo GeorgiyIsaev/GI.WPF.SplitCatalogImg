@@ -32,16 +32,21 @@ namespace GI.WPF.SplitCatalogImg
 
         public void SetCeurrntCatalog(string Catalog) 
         {
-            if (Catalog == "") return;
+            TextBox_BeforeCounter.Text = "";
+            TextBox_AfterCounter.Text = "";
+            TextBox_BeginningCounter.Text = "1";
 
+            /*Проверки неверных значений*/
+            if (Catalog == "") return;
             if (!Directory.Exists(Catalog))
             {
                 MessageBox.Show("Доступ к каталогу \"" + Catalog  + "\" отсутствует или такой катлог не существует!");
                 return;
             }  
+
+            /*Определение имени катлогой и род катлога*/
             currentCatalog = Catalog;
-            Title = "SplitCatalog:  " + Catalog;
-            
+            Title = "SplitCatalog:  " + Catalog;            
             List<string> listCatalogs = new List<string>(currentCatalog.Split('\\'));
             if(listCatalogs.Last() == "")
             {
@@ -63,24 +68,25 @@ namespace GI.WPF.SplitCatalogImg
                 TextBox_NameParentFolder.Text = listCatalogs.ElementAt(listCatalogs.Count - 2);
                 TextBox_NameCurrentFolder.Text = listCatalogs.Last();
             }
-            TextBox_BeforeCounter.Text = "";
-            TextBox_AfterCounter.Text = "";
+
+
+            /*Получение списка файлов*/
+            ListFiles.CreateNewListFile(currentCatalog);
 
             var agr = SortFilesList();
 
+            ListFiles.CreateNewListFile(currentCatalog);
+            DataGrid_NameFiles.ItemsSource = ListFiles.files;
 
-            TextBox_BeginningCounter.Text = "1";          
+
+            /*Доп информация о количесвте файлов*/                    
             TextBox_CountFiles.Text = "" + agr.Count;
-
             if(agr.Count<10)
                 TextBox_CountСharacter.Text = "1";
             else if (agr.Count < 100)
                 TextBox_CountСharacter.Text = "2";
             else if (agr.Count < 1000)
-                TextBox_CountСharacter.Text = "3";
-
-            DataGrid_NameFiles.ItemsSource = agr;
-
+                TextBox_CountСharacter.Text = "3";  
         }
 
 

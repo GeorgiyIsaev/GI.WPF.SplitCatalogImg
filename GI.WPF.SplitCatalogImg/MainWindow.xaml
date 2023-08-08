@@ -44,6 +44,7 @@
                         <RowDefinition Height="22"  />
                         <RowDefinition Height="22"  />
                         <RowDefinition Height="22"  />
+                        <RowDefinition Height="32"  />
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
@@ -65,7 +66,13 @@
                     <TextBlock Grid.Row="1" Grid.Column="0"  Width="80" Text=" Имя папки:" HorizontalAlignment="Left"/>
                     <TextBox Grid.Row="1" Grid.Column="1"  x:Name="TextBox_NameCurrentFolder" Text="TextBox_NameCurrentFolder" IsReadOnly="True" Grid.ColumnSpan="6" Margin="0,0,10,0" />
 
-                    <DataGrid x:Name="DataGrid_NameFiles" Grid.Row="2" Grid.ColumnSpan="7" Margin="0,0,10,0"/>
+                    <DataGrid x:Name="DataGrid_NameFiles" Grid.Row="2" Grid.ColumnSpan="7" Margin="0,0,10,0" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="N" Binding="{Binding Path=Id}" IsReadOnly="True"  Width="25" />
+                            <DataGridTextColumn Header="Имя файла" Binding="{Binding Path=Name}" IsReadOnly="True"  Width="*" />
+                            <DataGridHyperlinkColumn Header="Новое имя файла" Binding="{Binding Path=NewName}" IsReadOnly="True"  Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
 
                     <!--Нумерации 3-->
                     <TextBlock Grid.Row="3" Grid.Column="0"   Text=" Счетчик с: " HorizontalAlignment="Left"/>
@@ -85,44 +92,10 @@
                     <TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3"  Text=" После счетчика: " HorizontalAlignment="Left"/>
                     <TextBox Grid.Row="5" Grid.Column="3"  x:Name="TextBox_AfterCounter" Text="TextBox_NameParentFolder" IsReadOnly="True" Grid.ColumnSpan="4" Margin="5,0,10,0" Grid.RowSpan="2" />
 
-
+                    <!--После нумирации 6-->
+                    <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4" Margin="2" x:Name="bw" Content="reerg" />
+                    <Button Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="3" Margin="2,2,10,2" x:Name="ger"  Content="reerg" />
                 </Grid>
-
-
-                <!--<WrapPanel Orientation="Horizontal" Grid.Row="0">
-                    <TextBlock Width="80" Text="Род.папка" HorizontalAlignment="Left"/>
-                        <TextBox x:Name="TextBox_NameParentFolder" Text="TextBox_NameParentFolder" IsReadOnly="True" />
-                </WrapPanel>
-                <StackPanel Orientation="Horizontal" Grid.Row="1">
-                    <TextBlock Width="80" Text="Имя папки" HorizontalAlignment="Left"/>
-                    <TextBox x:Name="TextBox_NameCurrentFolder" Text="TextBox_NameCurrentFolder" IsReadOnly="True" Width="auto"/>
-                </StackPanel>
-                   <DataGrid Grid.Row="2"/>
-                 
-                </Grid>
-                <Grid Height="80" VerticalAlignment="Bottom" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="20" />
-                        <RowDefinition Height="20" />
-                        <RowDefinition Height="20" />                       
-                    </Grid.RowDefinitions>
-                    <StackPanel Orientation="Horizontal" Grid.Row="0">
-                        <TextBlock Width="80" Text="Имя папки" HorizontalAlignment="Left"/>
-                        <TextBox x:Name="r2e" Text="TextBox_NameCurrentFolder" IsReadOnly="True" Width="auto"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Grid.Row="1">
-                        <TextBlock Width="80" Text="Имя папки" HorizontalAlignment="Left"/>
-                        <TextBox x:Name="re" Text="TextBox_NameCurrentFolder" IsReadOnly="True" Width="auto"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Grid.Row="2">
-                        <TextBlock Width="80" Text="Имя папки" HorizontalAlignment="Left"/>
-                        <TextBox x:Name="re2" Text="TextBox_NameCurrentFolder" IsReadOnly="True" Width="auto"/>
-                    </StackPanel>-->
-                <!--</Grid>-->
-
-                <!--</Grid>-->
-
-
 
             </Grid>
         </Grid>
