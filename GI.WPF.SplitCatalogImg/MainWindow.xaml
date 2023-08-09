@@ -86,11 +86,11 @@
 
                     <!--Перед нумирацией 4-->
                     <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Text=" Перед счетчиком: " HorizontalAlignment="Left"/>
-                    <TextBox Grid.Row="4" Grid.Column="3"  x:Name="TextBox_BeforeCounter" Text="TextBox_BeforeCounter" IsReadOnly="True" Grid.ColumnSpan="4" Margin="5,0,10,0" Grid.RowSpan="2" />
+                    <TextBox Grid.Row="4" Grid.Column="3"  x:Name="TextBox_BeforeCounter" Text="TextBox_BeforeCounter"  Grid.ColumnSpan="4" Margin="5,0,10,0" Grid.RowSpan="2" />
 
                     <!--После нумирации 5-->
                     <TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3"  Text=" После счетчика: " HorizontalAlignment="Left"/>
-                    <TextBox Grid.Row="5" Grid.Column="3"  x:Name="TextBox_AfterCounter" Text="TextBox_NameParentFolder" IsReadOnly="True" Grid.ColumnSpan="4" Margin="5,0,10,0" Grid.RowSpan="2" />
+                    <TextBox Grid.Row="5" Grid.Column="3"  x:Name="TextBox_AfterCounter" Text="TextBox_NameParentFolder"  Grid.ColumnSpan="4" Margin="5,0,10,0" Grid.RowSpan="2" />
 
                     <!--После нумирации 6-->
                     <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4" Margin="2" x:Name="Button_Preview" Click="Button_Preview_Click" Content="Предпросмотр" />

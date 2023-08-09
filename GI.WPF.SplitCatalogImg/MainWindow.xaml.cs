@@ -81,6 +81,11 @@ namespace GI.WPF.SplitCatalogImg
         private void ResetComboBox_CountСharacter(int countFiles)
         {
             ComboBox_CountСharacter.Items.Clear();
+            if(countFiles == 0)
+            {
+                ComboBox_CountСharacter.Items.Add(0);
+                return;
+            }
             int digitCount = (int)Math.Log10(countFiles) + 1;
             do
             {
@@ -222,7 +227,7 @@ namespace GI.WPF.SplitCatalogImg
 
         private void Button_ReName_Click(object sender, RoutedEventArgs e)
         {
-            DataGrid_NameFiles.ItemsSource = ListFiles.files;
+           
         }
 
         private void TextBox_BeginningCounter_PreviewTextInput(object sender, TextCompositionEventArgs e)

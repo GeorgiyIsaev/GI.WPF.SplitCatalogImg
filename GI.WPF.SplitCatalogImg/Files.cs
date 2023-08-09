@@ -35,6 +35,7 @@ namespace GI.WPF.SplitCatalogImg
             files = new ObservableCollection<NameFile>();
 
             List<string> sortFilesList = new List<string>(Directory.GetFiles(currentCatalog));
+            if (sortFilesList.Count == 0) return;
             sortFilesList = SortFilesList(sortFilesList);
 
             int counter = 1;
