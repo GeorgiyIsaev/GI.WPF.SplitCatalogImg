@@ -16,6 +16,8 @@ namespace GI.WPF.SplitCatalogImg
         public string NewName { get; set; }
 
         private string fullName;
+        public string GetFullName() { return fullName; }
+
         public NameFile(string fullName, int id)
         {
             Id = id.ToString();

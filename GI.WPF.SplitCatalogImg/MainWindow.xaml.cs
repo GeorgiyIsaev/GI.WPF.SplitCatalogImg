@@ -31,11 +31,7 @@ namespace GI.WPF.SplitCatalogImg
         public string GetCeurrntCatalog() { return currentCatalog; }
 
         public void SetCeurrntCatalog(string Catalog) 
-        {
-            TextBox_BeforeCounter.Text = "";
-            TextBox_AfterCounter.Text = "";
-            TextBox_BeginningCounter.Text = "1";
-
+        {    
             /*Проверки неверных значений*/
             if (Catalog == "") return;
             if (!Directory.Exists(Catalog))
@@ -84,6 +80,7 @@ namespace GI.WPF.SplitCatalogImg
             if(countFiles == 0)
             {
                 ComboBox_CountСharacter.Items.Add(0);
+                ComboBox_CountСharacter.SelectedIndex = 0;
                 return;
             }
             int digitCount = (int)Math.Log10(countFiles) + 1;
@@ -92,44 +89,44 @@ namespace GI.WPF.SplitCatalogImg
                 ComboBox_CountСharacter.Items.Add(digitCount.ToString());
                 digitCount++;
             } while (digitCount <= 10);       
-            ComboBox_CountСharacter.SelectedIndex = 0;
+            ComboBox_CountСharacter.SelectedIndex = 0;  
         }
 
 
-        private List<string> SortFilesList()
-        {
-            List<string> sortFilesList = new List<string>(Directory.GetFiles(currentCatalog));
+        //private List<string> SortFilesList()
+        //{
+        //    List<string> sortFilesList = new List<string>(Directory.GetFiles(currentCatalog));
 
-            /*Сортируем*/
-            sortFilesList.Sort(delegate (string x, string y)
-            {
-                string temp1 = x.Substring(x.LastIndexOf('\\') + 1);
-                string temp2 = y.Substring(y.LastIndexOf('\\') + 1);
+        //    /*Сортируем*/
+        //    sortFilesList.Sort(delegate (string x, string y)
+        //    {
+        //        string temp1 = x.Substring(x.LastIndexOf('\\') + 1);
+        //        string temp2 = y.Substring(y.LastIndexOf('\\') + 1);
 
-                string[] substr = { "\\", ".jpg", ".png", ".gif", ".webn"};
-                foreach (string sub in substr)
-                {
-                    temp1 = temp1.Replace(sub, "");
-                    temp2 = temp2.Replace(sub, "");
-                }
+        //        string[] substr = { "\\", ".jpg", ".png", ".gif", ".webn"};
+        //        foreach (string sub in substr)
+        //        {
+        //            temp1 = temp1.Replace(sub, "");
+        //            temp2 = temp2.Replace(sub, "");
+        //        }
 
-                int number1; int number2;
-                if (int.TryParse(temp1, out number1) && int.TryParse(temp2, out number2))
-                {
-                    return number1 - number2;
-                }
-                else if (int.TryParse(temp1, out number1) || int.TryParse(temp2, out number2))
-                {
-                    return x.CompareTo(y);
-                }
-                else
-                {
-                    return x.CompareTo(y);
-                }
-            });
+        //        int number1; int number2;
+        //        if (int.TryParse(temp1, out number1) && int.TryParse(temp2, out number2))
+        //        {
+        //            return number1 - number2;
+        //        }
+        //        else if (int.TryParse(temp1, out number1) || int.TryParse(temp2, out number2))
+        //        {
+        //            return x.CompareTo(y);
+        //        }
+        //        else
+        //        {
+        //            return x.CompareTo(y);
+        //        }
+        //    });
 
-            return sortFilesList;
-        }
+        //    return sortFilesList;
+        //}
 
 
 
@@ -142,7 +139,15 @@ namespace GI.WPF.SplitCatalogImg
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        {   
+        {
+            TextBox_BeforeCounter.Text = "";
+            TextBox_AfterCounter.Text = "";
+            TextBox_BeginningCounter.Text = "1";
+            TextBox_NameParentFolder.Text = "";
+            TextBox_NameCurrentFolder.Text = "";
+            TextBox_CountFiles.Text = "0";
+            ComboBox_CountСharacter.Items.Add(0);
+            ComboBox_CountСharacter.SelectedIndex = 0;        
         }
 
 
@@ -227,7 +232,24 @@ namespace GI.WPF.SplitCatalogImg
 
         private void Button_ReName_Click(object sender, RoutedEventArgs e)
         {
-           
+            if (currentCatalog == "") return;
+            foreach(var item in ListFiles.files)
+            {
+                if (item.NewName == "") return;
+                try
+                {
+                    if (File.Exists(item.GetFullName()))
+                    {
+                        File.Move(item.GetFullName(), currentCatalog + "\\" + item.NewName);
+                    }                 
+                }catch
+                (Exception ex)
+                { 
+                    MessageBox.Show(ex.Message);
+                }
+            }
+
+            SetCeurrntCatalog(currentCatalog);
         }
 
         private void TextBox_BeginningCounter_PreviewTextInput(object sender, TextCompositionEventArgs e)
