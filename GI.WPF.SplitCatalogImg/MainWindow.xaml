@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GI.WPF.SplitCatalogImg"
         mc:Ignorable="d" FontSize="14"
-        Title="SplitCatalog" Height="350" Width="900">
+        Title="SplitCatalog" Height="450" Width="900">
     <Grid >
-        <Menu Height="25" VerticalAlignment="Top">
+        <Menu Height="25" VerticalAlignment="Top" FontSize="14">
             <MenuItem Header="Файл">
                 <MenuItem Header="Новый Катлог" Click="MenuItem_OpenNewCatalog_Click"></MenuItem>
                 <MenuItem Header="Открыть папку" Click="MenuItem_OpeCatalog_Click"></MenuItem>
@@ -120,8 +120,17 @@
                     <TextBox Grid.Row="5" Grid.Column="3"  x:Name="TextBox_AfterCounter" Text="TextBox_NameParentFolder"  Grid.ColumnSpan="4" Margin="5,0,10,0" Grid.RowSpan="2" />
 
                     <!--После нумирации 6-->
-                    <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4" Margin="2" x:Name="Button_Preview" Click="Button_Preview_Click" Content="Предпросмотр" />
-                    <Button Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="3" Margin="2,2,10,2" x:Name="Button_ReName" Click="Button_ReName_Click"  Content="Переименовать" />
+                    <Grid  Grid.Row="6" Grid.ColumnSpan="7" Margin="0,0,10,0"  >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button  Grid.Column="0"  DockPanel.Dock="Left" Margin="3" x:Name="Button_Preview" Click="Button_Preview_Click" Content="Предпросмотр" />
+                        <Button Grid.Column="1" DockPanel.Dock="Right"  Margin="3" x:Name="Button_ReName" Click="Button_ReName_Click"  Content="Переименовать" />
+                   
+                    </Grid>
+                    <!--<Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4" Margin="2" x:Name="Button_Preview" Click="Button_Preview_Click" Content="Предпросмотр" />
+                    <Button Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="3" Margin="2,2,10,2" x:Name="Button_ReName" Click="Button_ReName_Click"  Content="Переименовать" />-->
                 </Grid>
 
             </Grid>
