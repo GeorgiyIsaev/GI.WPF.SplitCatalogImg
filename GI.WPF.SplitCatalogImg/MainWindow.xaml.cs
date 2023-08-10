@@ -1,6 +1,8 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Security.Policy;
@@ -147,7 +149,8 @@ namespace GI.WPF.SplitCatalogImg
             TextBox_NameCurrentFolder.Text = "";
             TextBox_CountFiles.Text = "0";
             ComboBox_CountСharacter.Items.Add(0);
-            ComboBox_CountСharacter.SelectedIndex = 0;        
+            ComboBox_CountСharacter.SelectedIndex = 0;
+            CreateTreeView();
         }
 
 
@@ -164,6 +167,15 @@ namespace GI.WPF.SplitCatalogImg
 
             return "";
         }
+        private void MenuItem_OpeCatalogBig_Click(object sender, RoutedEventArgs e)
+        {
+            string test = "";
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+                test = File.ReadAllText(openFileDialog.FileName);
+        }
+     
+
 
         private void MenuItem_OpeCatalog_Click(object sender, RoutedEventArgs e)
         {
@@ -259,5 +271,104 @@ namespace GI.WPF.SplitCatalogImg
                     e.Handled = true;
                 }            
         }
+
+        private void FoldersItem_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            TreeView tree = (TreeView)sender;
+            TreeViewItem temp = ((TreeViewItem)tree.SelectedItem);
+            if(temp != null)
+            {
+                string catalog = temp.Tag.ToString();
+                SetCeurrntCatalog(catalog);
+            }           
+        }
+
+
+
+        private object dummyNode = null;
+        void folder_Expanded(object sender, RoutedEventArgs e)
+        {
+            TreeViewItem item = (TreeViewItem)sender;
+            if (item.Items.Count == 1 && item.Items[0] == dummyNode)
+            {
+                item.Items.Clear();
+                try
+                {
+                    foreach (string s in Directory.GetDirectories(item.Tag.ToString()))
+                    {
+                        TreeViewItem subitem = new TreeViewItem();
+                        subitem.Header = s.Substring(s.LastIndexOf("\\") + 1);
+                        subitem.Tag = s;
+                        subitem.FontWeight = FontWeights.Normal;
+                        subitem.Items.Add(dummyNode);
+                        subitem.Expanded += new RoutedEventHandler(folder_Expanded);
+                        item.Items.Add(subitem);
+                    }
+                }
+                catch (Exception) { }
+            }
+        }
+        void CreateTreeView()
+        {
+            foreach (string s in Directory.GetLogicalDrives())
+            {
+                TreeViewItem item = new TreeViewItem();
+                item.Header = s;
+                item.Tag = s;
+                item.FontWeight = FontWeights.Normal;
+                item.Items.Add(dummyNode);
+                // item.Items.Add(new DummyNode(s));
+                item.Expanded += new RoutedEventHandler(folder_Expanded);
+                FoldersItem.Items.Add(item);
+            }
+        }
     }
+
+    #region HeaderToImageConverter
+
+    [ValueConversion(typeof(string), typeof(bool))]
+    public class HeaderToImageConverter : IValueConverter
+    {
+        public static HeaderToImageConverter Instance =
+        new HeaderToImageConverter();
+
+        public object Convert(object value, Type targetType,
+        object parameter, CultureInfo culture)
+        {
+
+
+            if ((value as string).Contains(@"\"))
+            {
+                return BitmapT1oImageSource(Properties.Resources.diskdrive);
+            }
+            else
+            {
+                return BitmapT1oImageSource(Properties.Resources.folder);
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType,
+        object parameter, CultureInfo culture)
+        {
+            throw new NotSupportedException("Cannot convert back");
+        }
+
+        BitmapImage BitmapT1oImageSource(Bitmap bitmap)
+        {
+            using (MemoryStream memory = new MemoryStream())
+            {
+                bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Bmp);
+                memory.Position = 0;
+                BitmapImage bitmapimage = new BitmapImage();
+                bitmapimage.BeginInit();
+                bitmapimage.StreamSource = memory;
+                bitmapimage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapimage.EndInit();
+
+                return bitmapimage;
+            }
+        }
+    }
+
+    #endregion // HeaderToImageConverter
 }

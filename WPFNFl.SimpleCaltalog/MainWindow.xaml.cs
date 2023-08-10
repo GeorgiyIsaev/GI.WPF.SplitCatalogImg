@@ -19,6 +19,7 @@ using System.Xml.Linq;
 using System.Globalization;
 using System.Drawing;
 
+
 namespace WPFNFl.SimpleCaltalog
 {
     /// <summary>
@@ -35,30 +36,17 @@ namespace WPFNFl.SimpleCaltalog
    
 
         private object dummyNode = null;
-        private void foldersItem_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        private void Folders_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            TreeViewItem dp = (sender as Button).Parent as TreeViewItem;
-
-
-
-            MessageBox.Show("" + dp.Tag.ToString());
+            TreeView tree = (TreeView)sender;
+            TreeViewItem temp = ((TreeViewItem)tree.SelectedItem);
+            string cat = temp.Tag.ToString();
         }
 
  
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            foreach (string s in Directory.GetLogicalDrives())
-            {
-                
-                TreeViewItem item = new TreeViewItem();
-                item.Header = s;
-                item.Tag = s;
-                item.FontWeight = FontWeights.Normal;
-                item.Items.Add(dummyNode);
-               // item.Items.Add(new DummyNode(s));
-                item.Expanded += new RoutedEventHandler(folder_Expanded);
-                foldersItem.Items.Add(item);
-            }
+ 
         }
 
         void folder_Expanded(object sender, RoutedEventArgs e)
@@ -86,52 +74,6 @@ namespace WPFNFl.SimpleCaltalog
     }
 
 
-    #region HeaderToImageConverter
-
-    [ValueConversion(typeof(string), typeof(bool))]
-    public class HeaderToImageConverter : IValueConverter
-    {
-        public static HeaderToImageConverter Instance =
-        new HeaderToImageConverter();
-
-        public object Convert(object value, Type targetType,
-        object parameter, CultureInfo culture)
-        {
-          
-
-            if ((value as string).Contains(@"\"))
-            {
-                return BitmapT1oImageSource(Properties.Resources.diskdrive);
-            }
-            else
-            {
-                return BitmapT1oImageSource(Properties.Resources.folder);
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType,
-        object parameter, CultureInfo culture)
-        {
-            throw new NotSupportedException("Cannot convert back");
-        }
-
-        BitmapImage BitmapT1oImageSource(Bitmap bitmap)
-        {
-            using (MemoryStream memory = new MemoryStream())
-            {
-                bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Bmp);
-                memory.Position = 0;
-                BitmapImage bitmapimage = new BitmapImage();
-                bitmapimage.BeginInit();
-                bitmapimage.StreamSource = memory;
-                bitmapimage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapimage.EndInit();
-
-                return bitmapimage;
-            }
-        }
-    }
-
-    #endregion // HeaderToImageConverter
+    
 }
 
